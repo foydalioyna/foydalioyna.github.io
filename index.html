@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="O'zbekiston uchun foydali portal: ob-havo, valyuta kursi, namoz vaqtlari, xarita, davlat xizmatlari va foydali ma'lumotlar.">
+    <title>Foydali Oyna — O'zbekiston uchun portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇺🇿</text></svg>">
+</head>
+<body id="top">
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#top" aria-label="Foydali Oyna">
+                <span class="brand-mark" aria-hidden="true">🇺🇿</span>
+                <span class="brand-text">Foydali<b>Oyna</b></span>
+            </a>
+
+            <nav class="nav" id="mainNav" data-i18n-attr="aria-label:nav.aria" aria-label="Asosiy menyu">
+                <a href="#dashboard" data-i18n="nav.dashboard">Asosiy</a>
+                <a href="#map" data-i18n="nav.map">Xarita</a>
+                <a href="#services" data-i18n="nav.services">Xizmatlar</a>
+                <a href="#info" data-i18n="nav.info">Ma'lumotlar</a>
+                <a href="#tools" data-i18n="nav.tools">Kalkulyator</a>
+                <a href="#emergency" data-i18n="nav.help">Favqulodda</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="langToggle" type="button" data-i18n-attr="aria-label:lang.aria" aria-label="Tilni almashtirish" title="Til / Language">
+                    <span class="lang-flag" aria-hidden="true">🌐</span>
+                    <span id="langLabel">EN</span>
+                </button>
+                <button class="icon-btn" id="themeToggle" type="button" data-i18n-attr="aria-label:theme.aria" aria-label="Rejimni almashtirish" title="Kunduzgi / Tungi rejim">
+                    <span id="themeIcon" aria-hidden="true">🌙</span>
+                </button>
+                <button class="icon-btn nav-burger" id="navToggle" type="button" data-i18n-attr="aria-label:menu.aria" aria-label="Menyu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="hero-text">
+                    <p class="hero-greet" id="greeting">Assalomu alaykum!</p>
+                    <h1 data-i18n="hero.title">O'zbekiston uchun foydali ma'lumotlar</h1>
+                    <p class="hero-sub" data-i18n="hero.subtitle">Ob-havo, valyuta kursi, namoz vaqtlari va davlat xizmatlari — hammasi bitta joyda va bepul.</p>
+
+                    <form class="search" id="searchForm" role="search">
+                        <span class="search-icon" aria-hidden="true">🔍</span>
+                        <input type="search" id="searchInput" data-i18n-attr="placeholder:search.placeholder" placeholder="Internetdan qidirish..." autocomplete="off">
+                        <button type="submit" data-i18n="search.btn">Qidirish</button>
+                    </form>
+
+                    <div class="hero-meta">
+                        <span class="chip" id="clock">--:--:--</span>
+                        <span class="chip" id="todayDate">—</span>
+                        <span class="chip" id="hijriDate">—</span>
+                    </div>
+                </div>
+
+                <div class="hero-card glass">
+                    <div class="hero-card-top">
+                        <span class="live-dot"></span>
+                        <span data-i18n="hero.nowIn">Hozir O'zbekistonda</span>
+                    </div>
+                    <div class="tz-time" id="uzbTime">--:--</div>
+                    <div class="tz-note" id="uzbZone" data-i18n="hero.zone">Toshkent vaqti (UTC+5)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard widgets -->
+        <section class="section" id="dashboard">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="dash.title">Bugungi ma'lumotlar</h2>
+                    <p data-i18n="dash.subtitle">Real vaqtda yangilanadigan foydali ko'rsatkichlar</p>
+                </div>
+
+                <div class="widget-grid">
+                    <!-- Weather -->
+                    <article class="card widget" id="weatherCard">
+                        <div class="widget-head">
+                            <h3 data-i18n="weather.title">Ob-havo</h3>
+                            <select id="citySelect" data-i18n-attr="aria-label:city.aria" aria-label="Shahar"></select>
+                        </div>
+                        <div class="widget-body" id="weatherBody">
+                            <div class="skeleton-line" style="width:60%"></div>
+                            <div class="skeleton-line" style="width:40%"></div>
+                            <div class="skeleton-line" style="width:75%"></div>
+                        </div>
+                    </article>
+
+                    <!-- Currency -->
+                    <article class="card widget" id="currencyCard">
+                        <div class="widget-head">
+                            <h3 data-i18n="currency.title">Valyuta kursi</h3>
+                            <span class="badge" id="currencySource">CBU</span>
+                        </div>
+                        <div class="widget-body" id="currencyBody">
+                            <div class="skeleton-line" style="width:80%"></div>
+                            <div class="skeleton-line" style="width:55%"></div>
+                            <div class="skeleton-line" style="width:70%"></div>
+                        </div>
+                    </article>
+
+                    <!-- Prayer times -->
+                    <article class="card widget" id="prayerCard">
+                        <div class="widget-head">
+                            <h3 data-i18n="prayer.title">Namoz vaqtlari</h3>
+                            <select id="prayerCitySelect" data-i18n-attr="aria-label:city.aria" aria-label="Shahar"></select>
+                        </div>
+                        <div class="widget-body" id="prayerBody">
+                            <div class="skeleton-line" style="width:65%"></div>
+                            <div class="skeleton-line" style="width:80%"></div>
+                            <div class="skeleton-line" style="width:50%"></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map -->
+        <section class="section alt" id="map">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="map.title">O'zbekiston xaritasi</h2>
+                    <p data-i18n="map.subtitle">Shaharni bosing — ob-havo va namoz vaqtlari shu shaharga o'tadi</p>
+                </div>
+                <div class="card map-card">
+                    <div id="uzbMap" class="uzb-map">
+                        <div class="map-fallback" id="mapFallback">
+                            <span>🗺️</span>
+                            <p data-i18n="map.loading">Xarita yuklanmoqda...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="services.title">Foydali xizmatlar</h2>
+                    <p data-i18n="services.subtitle">Ko'p ishlatiladigan rasmiy va kundalik havolalar</p>
+                </div>
+                <div class="services-grid" id="servicesGrid"></div>
+            </div>
+        </section>
+
+        <!-- Useful info -->
+        <section class="section alt" id="info">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="info.title">Foydali ma'lumotlar</h2>
+                    <p data-i18n="info.subtitle">O'zbekiston haqida qisqacha, bayramlar va viloyat telefon kodlari</p>
+                </div>
+                <div class="info-grid">
+                    <article class="card info-card">
+                        <h3 data-i18n="info.about">O'zbekiston haqida</h3>
+                        <div id="factsList"></div>
+                    </article>
+                    <article class="card info-card">
+                        <h3 data-i18n="info.holidays">Bayramlar</h3>
+                        <div id="holidaysList"></div>
+                    </article>
+                    <article class="card info-card">
+                        <h3 data-i18n="info.codes">Viloyat telefon kodlari</h3>
+                        <div id="codesList"></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools -->
+        <section class="section" id="tools">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="tools.title">Valyuta kalkulyatori</h2>
+                    <p data-i18n="tools.subtitle">Kurslar asosida tez hisob-kitob qiling</p>
+                </div>
+
+                <div class="card converter">
+                    <div class="converter-row">
+                        <div class="field">
+                            <label for="convAmount" data-i18n="conv.amount">Miqdor</label>
+                            <input type="number" id="convAmount" value="100" min="0" step="any" inputmode="decimal">
+                        </div>
+                        <div class="field">
+                            <label for="convFrom" data-i18n="conv.from">Valyutadan</label>
+                            <select id="convFrom"></select>
+                        </div>
+                        <button class="swap-btn" id="swapBtn" type="button" data-i18n-attr="aria-label:swap.title;title:swap.title" aria-label="Almashtirish" title="Almashtirish">⇄</button>
+                        <div class="field">
+                            <label for="convTo" data-i18n="conv.to">Valyutaga</label>
+                            <select id="convTo"></select>
+                        </div>
+                    </div>
+                    <div class="converter-result">
+                        <span id="convResult">—</span>
+                        <small id="convRate"></small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency -->
+        <section class="section alt" id="emergency">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="em.title">Favqulodda raqamlar</h2>
+                    <p data-i18n="em.subtitle">Muammo bo'lsa darhol qo'ng'iroq qiling — bepul</p>
+                </div>
+                <div class="emergency-grid" id="emergencyGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="brand-mark" aria-hidden="true">🇺🇿</span>
+                <div>
+                    <strong>FoydaliOyna</strong>
+                    <p data-i18n="footer.tagline">O'zbekiston uchun foydali sayt</p>
+                </div>
+            </div>
+            <p class="footer-note" data-i18n="footer.note">Ma'lumotlar ochiq manbalardan olinadi. Rasmiy xizmatlar uchun tegishli davlat saytlariga murojaat qiling.</p>
+        </div>
+    </footer>
+
+    <button class="to-top" id="toTop" type="button" data-i18n-attr="aria-label:top.aria" aria-label="Yuqoriga">↑</button>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

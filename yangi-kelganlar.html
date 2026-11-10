@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="O'zbekistonga yangi kelganlar uchun boshlang'ich qo'llanma: viza, SIM karta, to'lovlar, transport, turar joy, xaridlar va foydali iboralar.">
+    <title data-i18n="meta.title">Yangi kelganlar uchun — Foydali Oyna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+</head>
+<body id="top">
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html" aria-label="Foydali Oyna">
+                <span class="brand-mark" aria-hidden="true">🇺🇿</span>
+                <span class="brand-text">Foydali<b>Oyna</b></span>
+            </a>
+
+            <a class="back-link" href="index.html" data-i18n="back.home">← Bosh sahifa</a>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="langToggle" type="button" data-i18n-attr="aria-label:lang.aria" aria-label="Tilni almashtirish" title="Til / Language">
+                    <span class="lang-flag" aria-hidden="true">🌐</span>
+                    <span id="langLabel">EN</span>
+                </button>
+                <button class="icon-btn" id="themeToggle" type="button" data-i18n-attr="aria-label:theme.aria" aria-label="Rejimni almashtirish" title="Kunduzgi / Tungi rejim">
+                    <span id="themeIcon" aria-hidden="true">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Newcomers guide -->
+        <section class="section" id="newcomers">
+            <div class="container">
+                <div class="section-head">
+                    <h2 data-i18n="nc.title">Yangi kelganlar uchun</h2>
+                    <p data-i18n="nc.subtitle">O'zbekistonga yangi kelganlar uchun boshlang'ich qo'llanma</p>
+                </div>
+                <div class="nc-grid" id="newcomerGrid"></div>
+                <article class="card nc-phrases">
+                    <h3 data-i18n="nc.phrasesTitle">Foydali iboralar</h3>
+                    <p class="nc-note" data-i18n="nc.phrasesNote">O'zbekcha asosiy iboralar — inglizcha tarjimasi bilan</p>
+                    <div id="phraseList"></div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="brand-mark" aria-hidden="true">🇺🇿</span>
+                <div>
+                    <strong>FoydaliOyna</strong>
+                    <p data-i18n="footer.tagline">O'zbekiston uchun foydali sayt</p>
+                </div>
+            </div>
+            <p class="footer-note" data-i18n="footer.note">Ma'lumotlar ochiq manbalardan olinadi. Rasmiy xizmatlar uchun tegishli davlat saytlariga murojaat qiling.</p>
+        </div>
+    </footer>
+
+    <button class="to-top" id="toTop" type="button" data-i18n-attr="aria-label:top.aria" aria-label="Yuqoriga">↑</button>
+
+    <script src="newcomers.js"></script>
+    <script src="ai-assistant.js"></script>
+</body>
+</html>

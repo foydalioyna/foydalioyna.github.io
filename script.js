@@ -16,6 +16,7 @@
            'nav.info': "Ma'lumotlar",
            'nav.tools': 'Kalkulyator',
            'nav.help': 'Favqulodda',
+           'nav.newcomers': 'Yangi kelganlar',
            'nav.aria': 'Asosiy menyu',
            'lang.aria': 'Tilni almashtirish',
            'theme.aria': 'Rejimni almashtirish',
@@ -40,10 +41,12 @@
            'services.title': 'Foydali xizmatlar',
            'services.subtitle': "Ko'p ishlatiladigan rasmiy va kundalik havolalar",
            'info.title': "Foydali ma'lumotlar",
-           'info.subtitle': "O'zbekiston haqida qisqacha, bayramlar va viloyat telefon kodlari",
+           'info.subtitle': "O'zbekiston haqida qisqacha va bayramlar",
            'info.about': "O'zbekiston haqida",
            'info.holidays': 'Bayramlar',
-           'info.codes': 'Viloyat telefon kodlari',
+           'banner.title': "Yangi kelganlar uchun qo'llanma",
+           'banner.text': "Viza, SIM karta, to'lovlar, transport va boshqa zarur ma'lumotlar",
+           'banner.btn': 'Ochish →',
            'tools.title': 'Valyuta kalkulyatori',
            'tools.subtitle': 'Kurslar asosida tez hisob-kitob qiling',
            'conv.amount': 'Miqdor',
@@ -54,7 +57,7 @@
            'footer.tagline': "O'zbekiston uchun foydali sayt",
            'footer.note': "Ma'lumotlar ochiq manbalardan olinadi. Rasmiy xizmatlar uchun tegishli davlat saytlariga murojaat qiling.",
            'meta.title': "Foydali Oyna — O'zbekiston uchun portal",
-           'meta.desc': "O'zbekiston uchun foydali portal: ob-havo, valyuta kursi, namoz vaqtlari, xarita va foydali ma'lumotlar.",
+           'meta.desc': "O'zbekiston uchun foydali portal: ob-havo, valyuta kursi, namoz vaqtlari, xarita, foydali ma'lumotlar va yangi kelganlar uchun qo'llanma.",
            'greet.morning': 'Xayrli tong!',
            'greet.day': 'Xayrli kun!',
            'greet.evening': 'Xayrli kech!',
@@ -71,7 +74,6 @@
            'prayer.next': 'Keyingi namoz',
            'prayer.hour': 'soat',
            'prayer.min': 'daqiqa',
-           'hijri.suffix': 'hijriy',
            'conv.rate': '1 {from} = {rate} {to}',
            'conv.error': 'Kurslar yuklanmagan',
            'fajr': 'Bomdod', 'sunrise': 'Quyosh', 'dhuhr': 'Peshin',
@@ -85,6 +87,7 @@
            'nav.info': 'Info',
            'nav.tools': 'Converter',
            'nav.help': 'Emergency',
+           'nav.newcomers': 'Newcomers',
            'nav.aria': 'Main menu',
            'lang.aria': 'Switch language',
            'theme.aria': 'Toggle theme',
@@ -109,10 +112,12 @@
            'services.title': 'Useful services',
            'services.subtitle': 'Frequently used official and everyday links',
            'info.title': 'Useful information',
-           'info.subtitle': 'Quick facts about Uzbekistan, holidays and regional phone codes',
+           'info.subtitle': 'Quick facts about Uzbekistan and holidays',
            'info.about': 'About Uzbekistan',
            'info.holidays': 'Holidays',
-           'info.codes': 'Regional phone codes',
+           'banner.title': 'Newcomers guide',
+           'banner.text': 'Visa, SIM card, payments, transport and other essentials',
+           'banner.btn': 'Open →',
            'tools.title': 'Currency converter',
            'tools.subtitle': 'Quick conversions based on the latest rates',
            'conv.amount': 'Amount',
@@ -123,7 +128,7 @@
            'footer.tagline': 'A useful site for Uzbekistan',
            'footer.note': 'Data is fetched from open sources. For official services please visit the relevant government websites.',
            'meta.title': 'Foydali Oyna — A portal for Uzbekistan',
-           'meta.desc': 'A useful portal for Uzbekistan: weather, exchange rates, prayer times, a map and useful information.',
+           'meta.desc': 'A useful portal for Uzbekistan: weather, exchange rates, prayer times, a map, useful information and a guide for newcomers.',
            'greet.morning': 'Good morning!',
            'greet.day': 'Good afternoon!',
            'greet.evening': 'Good evening!',
@@ -140,7 +145,6 @@
            'prayer.next': 'Next prayer',
            'prayer.hour': 'h',
            'prayer.min': 'min',
-           'hijri.suffix': 'AH',
            'conv.rate': '1 {from} = {rate} {to}',
            'conv.error': 'Rates not loaded',
            'fajr': 'Fajr', 'sunrise': 'Sunrise', 'dhuhr': 'Dhuhr',
@@ -156,14 +160,13 @@
        weather: null,
        currency: null,
        prayer: null,
-       hijri: null,
        map: null,
        markers: {}
    };
    
    const t = (key) => (I18N[state.lang][key] ?? I18N.uz[key] ?? key);
    
-   /* ---------- 1b. Sana, hafta va hijriy oy nomlari ---------- */
+   /* ---------- 1b. Sana va hafta kunlari ---------- */
    const MONTHS = {
        uz: ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr'],
        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -175,10 +178,6 @@
    const WEEKDAYS_SHORT = {
        uz: ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan'],
        en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-   };
-   const HIJRI_MONTHS = {
-       uz: ['Muharram', 'Safar', 'Rabiul avval', 'Rabiul soniy', 'Jumadul avval', 'Jumadul soniy', 'Rajab', "Sha'bon", 'Ramazon', 'Shavvol', 'Zulqada', 'Zulhijja'],
-       en: ['Muharram', 'Safar', "Rabi' al-awwal", "Rabi' al-thani", 'Jumada al-awwal', 'Jumada al-thani', 'Rajab', "Sha'ban", 'Ramadan', 'Shawwal', "Dhu al-Qi'dah", 'Dhu al-Hijjah']
    };
    
    function fmtDate(d) {
@@ -310,24 +309,6 @@
        { d: { uz: "har yili o'zgaradi", en: 'varies yearly' }, n: { uz: "Ro'za hayit, Qurbon hayit", en: 'Eid al-Fitr, Eid al-Adha' } }
    ];
    
-   /* ---------- 6d. Viloyat telefon kodlari ---------- */
-   const REGION_CODES = [
-       { uz: 'Toshkent shahri', en: 'Tashkent city', code: '71' },
-       { uz: 'Toshkent viloyati', en: 'Tashkent region', code: '70' },
-       { uz: 'Andijon viloyati', en: 'Andijan region', code: '74' },
-       { uz: 'Buxoro viloyati', en: 'Bukhara region', code: '65' },
-       { uz: "Farg'ona viloyati", en: 'Fergana region', code: '73' },
-       { uz: 'Jizzax viloyati', en: 'Jizzakh region', code: '72' },
-       { uz: "Qashqadaryo viloyati", en: 'Kashkadarya region', code: '75' },
-       { uz: 'Navoiy viloyati', en: 'Navoiy region', code: '79' },
-       { uz: 'Namangan viloyati', en: 'Namangan region', code: '69' },
-       { uz: "Qoraqalpog'iston Resp.", en: 'Karakalpakstan', code: '61' },
-       { uz: 'Samarqand viloyati', en: 'Samarkand region', code: '66' },
-       { uz: 'Sirdaryo viloyati', en: 'Sirdaryo region', code: '67' },
-       { uz: 'Surxondaryo viloyati', en: 'Surkhandarya region', code: '76' },
-       { uz: 'Xorazm viloyati', en: 'Khorezm region', code: '62' }
-   ];
-   
    /* ---------- 7. Yordamchilar ---------- */
    const $ = (sel) => document.querySelector(sel);
    
@@ -399,11 +380,6 @@
        $('#clock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
        $('#uzbTime').textContent = `${pad(uzb.getHours())}:${pad(uzb.getMinutes())}`;
        $('#todayDate').textContent = fmtDate(now);
-       if (state.hijri) {
-           const { day, year, monthNumber } = state.hijri;
-           const monthName = HIJRI_MONTHS[state.lang][monthNumber - 1] || '';
-           $('#hijriDate').textContent = `${day} ${monthName} ${year} ${t('hijri.suffix')}`;
-       }
    }
    
    /* ---------- 10. Ob-havo ---------- */
@@ -551,9 +527,6 @@
                timezone: data.data.meta.timezone,
                times: order.map(([key, api]) => ({ key, time: clean(timings[api]) }))
            };
-           const hj = data.data.date.hijri;
-           state.hijri = { day: Number(hj.day), year: hj.year, monthNumber: Number(hj.month.number) || 1 };
-           tickClock();
            renderPrayer();
        } catch (e) {
            console.warn('prayer', e);
@@ -653,15 +626,7 @@
                <span>${escapeHtml(h.n[state.lang])}</span>
            </div>`).join('');
    }
-   
-   function renderCodes() {
-       $('#codesList').innerHTML = REGION_CODES.map((r) => `
-           <div class="code-row">
-               <span>${escapeHtml(r[state.lang])}</span>
-               <span class="c">+998 ${r.code}</span>
-           </div>`).join('');
-   }
-   
+
    /* ---------- 14. Xarita (Leaflet) ---------- */
    function initMap() {
        const el = document.getElementById('uzbMap');
@@ -788,7 +753,6 @@
            renderEmergency();
            renderFacts();
            renderHolidays();
-           renderCodes();
            updateMapPopups();
            if (state.weather) renderWeather();
            if (state.currency) renderCurrency();
@@ -882,7 +846,6 @@
        renderEmergency();
        renderFacts();
        renderHolidays();
-       renderCodes();
        tickClock();
        setInterval(tickClock, 1000);
    

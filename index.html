@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="O'zbekiston uchun foydali portal: ob-havo, valyuta kursi, namoz vaqtlari, xarita, davlat xizmatlari va foydali ma'lumotlar.">
+    <meta name="description" content="O'zbekiston uchun foydali portal: ob-havo, valyuta kursi, namoz vaqtlari, xarita, davlat xizmatlari, foydali ma'lumotlar va yangi kelganlar uchun qo'llanma.">
     <title>Foydali Oyna — O'zbekiston uchun portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +28,7 @@
                 <a href="#info" data-i18n="nav.info">Ma'lumotlar</a>
                 <a href="#tools" data-i18n="nav.tools">Kalkulyator</a>
                 <a href="#emergency" data-i18n="nav.help">Favqulodda</a>
+                <a href="yangi-kelganlar.html" data-i18n="nav.newcomers">Yangi kelganlar</a>
             </nav>
 
             <div class="header-actions">
@@ -46,6 +47,18 @@
     </header>
 
     <main>
+        <!-- Newcomers compact bar -->
+        <div class="container nc-bar-wrap">
+            <a class="nc-bar" href="yangi-kelganlar.html">
+                <span class="nc-bar-ico" aria-hidden="true">🧭</span>
+                <span class="nc-bar-text">
+                    <strong data-i18n="banner.title">Yangi kelganlar uchun qo'llanma</strong>
+                    <span class="nc-bar-sub" data-i18n="banner.text">Viza, SIM karta, to'lovlar, transport va boshqa zarur ma'lumotlar</span>
+                </span>
+                <span class="nc-bar-btn" data-i18n="banner.btn">Ochish →</span>
+            </a>
+        </div>
+
         <!-- Hero -->
         <section class="hero">
             <div class="container hero-inner">
@@ -63,7 +76,6 @@
                     <div class="hero-meta">
                         <span class="chip" id="clock">--:--:--</span>
                         <span class="chip" id="todayDate">—</span>
-                        <span class="chip" id="hijriDate">—</span>
                     </div>
                 </div>
 
@@ -163,7 +175,7 @@
             <div class="container">
                 <div class="section-head">
                     <h2 data-i18n="info.title">Foydali ma'lumotlar</h2>
-                    <p data-i18n="info.subtitle">O'zbekiston haqida qisqacha, bayramlar va viloyat telefon kodlari</p>
+                    <p data-i18n="info.subtitle">O'zbekiston haqida qisqacha va bayramlar</p>
                 </div>
                 <div class="info-grid">
                     <article class="card info-card">
@@ -173,10 +185,6 @@
                     <article class="card info-card">
                         <h3 data-i18n="info.holidays">Bayramlar</h3>
                         <div id="holidaysList"></div>
-                    </article>
-                    <article class="card info-card">
-                        <h3 data-i18n="info.codes">Viloyat telefon kodlari</h3>
-                        <div id="codesList"></div>
                     </article>
                 </div>
             </div>
@@ -243,5 +251,6 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
+    <script src="ai-assistant.js"></script>
 </body>
 </html>

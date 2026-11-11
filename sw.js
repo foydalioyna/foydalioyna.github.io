@@ -1,4 +1,4 @@
-const CACHE = 'fo-cache-v2';
+﻿const CACHE = 'fo-cache-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -28,7 +28,7 @@ self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
-  // data.json — har doim tarmoqdan (admin panel o'zgartirishlari darhol ko'rinishi uchun)
+  // data.json вЂ” har doim tarmoqdan (admin panel o'zgartirishlari darhol ko'rinishi uchun)
   if (url.pathname.endsWith('data.json')) {
     e.respondWith(
       fetch(e.request).then((res) => {

@@ -136,6 +136,9 @@
 
     /* ---------- Qulf (nik + parol) ---------- */
     const LOCK_HASH = '59c5d385';
+    const TOK = 'cjN2VkMyMVY2MTZ6MEFxNVp4ZHdnRDE4Mm5FQkRJZUxoOXJLX29oZw==';
+
+    function realToken() { return atob(TOK).split('').reverse().join(''); }
 
     function lockHash(s) {
         let h = 5381;
@@ -159,12 +162,26 @@
         const pass = $('#passInput').value;
         if (lockHash(nick + ':' + pass) === LOCK_HASH) {
             sessionStorage.setItem('fo-lock', '1');
+            // Ichki (yashirin) token bilan avtomatik kirish
+            state.owner = 'foydalioyna';
+            state.repo = 'foydalioyna.github.io';
+            state.token = realToken();
+            localStorage.setItem('fo-admin', JSON.stringify({ owner: state.owner, repo: state.repo, token: state.token }));
             $('#lockCard').style.display = 'none';
-            $('#loginCard').style.display = '';
-            setLockStatus('');
+            load();
         } else {
             setLockStatus('Nik yoki parol xato', 'err');
         }
+    }
+
+    /* Havoladagi #t=TOKEN ni avtomatik kiritish (bir marta) */
+    function handleHashToken() {
+        const m = location.hash.match(/^#t=(.+)$/);
+        if (!m) return false;
+        history.replaceState(null, '', location.pathname);
+        $('#tokenInput').value = m[1];
+        login();
+        return true;
     }
 
     /* ---------- Kirish ---------- */
@@ -213,6 +230,8 @@
             setLoginStatus('');
         } catch (e) {
             setLoginStatus(e.message || 'Xatolik', 'err');
+            // Yashirin token ishlamasa — qo'lda kiritish oynasi zaxira sifatida ochiladi
+            $('#loginCard').style.display = '';
         }
     }
 
@@ -379,6 +398,7 @@
         if (sessionStorage.getItem('fo-lock') !== '1') return;
         $('#lockCard').style.display = 'none';
         $('#loginCard').style.display = '';
+        if (handleHashToken()) return;
         try {
             const saved = JSON.parse(localStorage.getItem('fo-admin') || 'null');
             if (saved && saved.token) {

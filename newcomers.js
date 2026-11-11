@@ -45,7 +45,7 @@
     const t = (key) => (I18N[state.lang][key] ?? I18N.uz[key] ?? key);
 
     /* ---------- 2. Qo'llanma qadamlari ---------- */
-    const NEWCOMER_STEPS = [
+    let NEWCOMER_STEPS = [
         {
             ico: '🛂',
             title: { uz: 'Viza va migratsiya', en: 'Visa & migration' },
@@ -145,7 +145,7 @@
     ];
 
     /* ---------- 3. Foydali iboralar ---------- */
-    const PHRASES = [
+    let PHRASES = [
         { uz: 'Assalomu alaykum', en: 'Hello' },
         { uz: 'Rahmat', en: 'Thank you' },
         { uz: "Ha / Yo'q", en: 'Yes / No' },
@@ -245,12 +245,24 @@
         toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    /* ---------- 8. Ishga tushirish ---------- */
-    function init() {
-        setupControls();
-        applyStaticTexts();
-        renderNewcomers();
-    }
+     /* ---------- Tashqi kontent (data.json - admin panel) ---------- */
+     function loadContentData() {
+         return fetch('data.json', { cache: 'no-store' })
+             .then((r) => (r.ok ? r.json() : null))
+             .then((d) => {
+                 if (!d) return;
+                 if (Array.isArray(d.newcomerSteps) && d.newcomerSteps.length) NEWCOMER_STEPS = d.newcomerSteps;
+                 if (Array.isArray(d.phrases) && d.phrases.length) PHRASES = d.phrases;
+             })
+             .catch(() => {});
+     }
+     /* ---------- 8. Ishga tushirish ---------- */
+         function init() {
+         setupControls();
+         applyStaticTexts();
+         renderNewcomers();
+         loadContentData().then(renderNewcomers);
+     }
 
     document.addEventListener('DOMContentLoaded', init);
 

@@ -1,0 +1,134 @@
+{
+    "services": [
+        { "ico": "🏛️", "name": { "uz": "Davlat xizmatlari", "en": "Public services" }, "cat": { "uz": "my.gov.uz", "en": "my.gov.uz" }, "url": "https://my.gov.uz" },
+        { "ico": "🧾", "name": { "uz": "Soliq xizmati", "en": "Tax service" }, "cat": { "uz": "soliq.uz", "en": "soliq.uz" }, "url": "https://soliq.uz" },
+        { "ico": "🏦", "name": { "uz": "Markaziy bank", "en": "Central Bank" }, "cat": { "uz": "cbu.uz", "en": "cbu.uz" }, "url": "https://cbu.uz" },
+        { "ico": "📮", "name": { "uz": "Pochta (O'zbekiston)", "en": "Post (Uzbekistan)" }, "cat": { "uz": "pochta.uz", "en": "pochta.uz" }, "url": "https://pochta.uz" },
+        { "ico": "💳", "name": { "uz": "Payme", "en": "Payme" }, "cat": { "uz": "To'lovlar", "en": "Payments" }, "url": "https://payme.uz" },
+        { "ico": "💳", "name": { "uz": "Click", "en": "Click" }, "cat": { "uz": "To'lovlar", "en": "Payments" }, "url": "https://click.uz" },
+        { "ico": "🛒", "name": { "uz": "Uzum Market", "en": "Uzum Market" }, "cat": { "uz": "Online bozor", "en": "Online market" }, "url": "https://uzum.uz" },
+        { "ico": "🎫", "name": { "uz": "Aviachiptalar", "en": "Air tickets" }, "cat": { "uz": "Sayohat", "en": "Travel" }, "url": "https://uzairways.com" },
+        { "ico": "🚆", "name": { "uz": "Temiryo'l chiptalari", "en": "Railway tickets" }, "cat": { "uz": "railway.uz", "en": "railway.uz" }, "url": "https://railway.uz" },
+        { "ico": "🏥", "name": { "uz": "Sog'liqni saqlash", "en": "Healthcare" }, "cat": { "uz": "ssv.uz", "en": "ssv.uz" }, "url": "https://ssv.uz" },
+        { "ico": "🎓", "name": { "uz": "Ta'lim vazirligi", "en": "Ministry of Education" }, "cat": { "uz": "gov.uz", "en": "gov.uz" }, "url": "https://gov.uz" },
+        { "ico": "📰", "name": { "uz": "Yangiliklar", "en": "News" }, "cat": { "uz": "kun.uz", "en": "kun.uz" }, "url": "https://kun.uz" },
+        { "ico": "🌦️", "name": { "uz": "Ob-havo (rasmiy)", "en": "Weather (official)" }, "cat": { "uz": "meteo.uz", "en": "meteo.uz" }, "url": "https://meteo.uz" },
+        { "ico": "🗺️", "name": { "uz": "Xarita", "en": "Maps" }, "cat": { "uz": "Yandex Maps", "en": "Yandex Maps" }, "url": "https://yandex.uz/maps" },
+        { "ico": "📚", "name": { "uz": "Vikipediya", "en": "Wikipedia" }, "cat": { "uz": "Bilim", "en": "Knowledge" }, "url": "https://uz.wikipedia.org" },
+        { "ico": "🌐", "name": { "uz": "Google", "en": "Google" }, "cat": { "uz": "Qidiruv", "en": "Search" }, "url": "https://google.com" }
+    ],
+    "emergency": [
+        { "ico": "🚒", "num": "101", "name": { "uz": "Yong'in xavfsizligi", "en": "Fire service" } },
+        { "ico": "🚓", "num": "102", "name": { "uz": "Politsiya", "en": "Police" } },
+        { "ico": "🚑", "num": "103", "name": { "uz": "Tez tibbiy yordam", "en": "Ambulance" } },
+        { "ico": "🔥", "num": "104", "name": { "uz": "Gaz xizmati", "en": "Gas service" } },
+        { "ico": "🆘", "num": "112", "name": { "uz": "Yagona qutqaruv xizmati", "en": "Unified emergency" } },
+        { "ico": "🧒", "num": "1115", "name": { "uz": "Bolalar ishonch raqami", "en": "Children's helpline" } }
+    ],
+    "facts": [
+        { "ico": "🏛️", "label": { "uz": "Poytaxt", "en": "Capital" }, "value": { "uz": "Toshkent", "en": "Tashkent" } },
+        { "ico": "👥", "label": { "uz": "Aholi", "en": "Population" }, "value": { "uz": "~37 million", "en": "~37 million" } },
+        { "ico": "📐", "label": { "uz": "Maydon", "en": "Area" }, "value": { "uz": "448 978 km²", "en": "448,978 km²" } },
+        { "ico": "💰", "label": { "uz": "Pul birligi", "en": "Currency" }, "value": { "uz": "so'm (UZS)", "en": "Uzbek som (UZS)" } },
+        { "ico": "🗣️", "label": { "uz": "Rasmiy til", "en": "Official language" }, "value": { "uz": "o'zbek tili", "en": "Uzbek" } },
+        { "ico": "🕐", "label": { "uz": "Vaqt mintaqasi", "en": "Time zone" }, "value": { "uz": "UTC+5", "en": "UTC+5" } },
+        { "ico": "📞", "label": { "uz": "Xalqaro kod", "en": "Dialing code" }, "value": { "uz": "+998", "en": "+998" } },
+        { "ico": "🏙️", "label": { "uz": "Ma'muriy tuzilma", "en": "Administrative" }, "value": { "uz": "12 viloyat, Qoraqalpog'iston va Toshkent", "en": "12 regions, Karakalpakstan and Tashkent" } }
+    ],
+    "holidays": [
+        { "d": { "uz": "1-yanvar", "en": "January 1" }, "n": { "uz": "Yangi yil", "en": "New Year" } },
+        { "d": { "uz": "8-mart", "en": "March 8" }, "n": { "uz": "Xotin-qizlar kuni", "en": "Women's Day" } },
+        { "d": { "uz": "21-mart", "en": "March 21" }, "n": { "uz": "Navro'z bayrami", "en": "Navruz" } },
+        { "d": { "uz": "9-may", "en": "May 9" }, "n": { "uz": "Xotira va qadrlash kuni", "en": "Day of Memory and Honor" } },
+        { "d": { "uz": "1-sentabr", "en": "September 1" }, "n": { "uz": "Mustaqillik kuni", "en": "Independence Day" } },
+        { "d": { "uz": "1-oktabr", "en": "October 1" }, "n": { "uz": "O'qituvchi va murabbiylar kuni", "en": "Teachers' and Mentors' Day" } },
+        { "d": { "uz": "8-dekabr", "en": "December 8" }, "n": { "uz": "Konstitutsiya kuni", "en": "Constitution Day" } },
+        { "d": { "uz": "har yili o'zgaradi", "en": "varies yearly" }, "n": { "uz": "Ro'za hayit, Qurbon hayit", "en": "Eid al-Fitr, Eid al-Adha" } }
+    ],
+    "newcomerSteps": [
+        {
+            "ico": "🛂",
+            "title": { "uz": "Viza va migratsiya", "en": "Visa & migration" },
+            "text": { "uz": "Ko'p davlatlar fuqarolari uchun 30 kun viza talab qilinmaydi. Elektron viza va rasmiy qoidalar portalda.", "en": "Citizens of many countries can enter visa-free for up to 30 days. E-visas and official rules are on the portal." },
+            "links": [
+                { "label": "e-visa.gov.uz", "url": "https://e-visa.gov.uz" },
+                { "label": "mvd.uz", "url": "https://mvd.uz" }
+            ]
+        },
+        {
+            "ico": "📱",
+            "title": { "uz": "SIM karta", "en": "SIM card" },
+            "text": { "uz": "Pasport bilan har qanday operator do'konida bir necha daqiqada rasmiylashtiriladi.", "en": "Bring your passport to any operator store — a SIM card is issued within minutes." },
+            "links": [
+                { "label": "beeline.uz", "url": "https://beeline.uz" },
+                { "label": "ucell.uz", "url": "https://ucell.uz" },
+                { "label": "mobi.uz", "url": "https://mobi.uz" },
+                { "label": "humans.uz", "url": "https://humans.uz" }
+            ]
+        },
+        {
+            "ico": "💳",
+            "title": { "uz": "To'lovlar", "en": "Payments" },
+            "text": { "uz": "Kommunal xizmatlar, taksi va onlayn xaridlar asosan Payme va Click orqali. Naqd pul ham keng qo'llanadi.", "en": "Utilities, taxis and online shopping mostly run through Payme and Click. Cash is still widely accepted." },
+            "links": [
+                { "label": "payme.uz", "url": "https://payme.uz" },
+                { "label": "click.uz", "url": "https://click.uz" }
+            ]
+        },
+        {
+            "ico": "🚕",
+            "title": { "uz": "Transport", "en": "Transport" },
+            "text": { "uz": "Shahar ichida taksi — Yandex Go ilovasi. Toshkent metrosi va avtobuslarda ATTO kartasi ishlatiladi.", "en": "Yandex Go covers city taxis. The Tashkent metro and buses use the ATTO card." },
+            "links": [
+                { "label": "Yandex Go", "url": "https://yandex.uz" },
+                { "label": "railway.uz", "url": "https://railway.uz" }
+            ]
+        },
+        {
+            "ico": "🏠",
+            "title": { "uz": "Turar joy", "en": "Housing" },
+            "text": { "uz": "Ijara kvartiralar OLX va Telegram kanallarida e'lon qilinadi; yozma shartnoma odatdagidek.", "en": "Rental listings are posted on OLX and Telegram channels; a written contract is standard." },
+            "links": [
+                { "label": "olx.uz", "url": "https://www.olx.uz" }
+            ]
+        },
+        {
+            "ico": "🛒",
+            "title": { "uz": "Xaridlar", "en": "Shopping" },
+            "text": { "uz": "Supermarketlar: Makro, Korzinka, Uzum Market. Eng arzon sabzavot-mevalar bozorlarda.", "en": "Supermarkets: Makro, Korzinka, Uzum Market. Bazaars have the cheapest fresh produce." },
+            "links": [
+                { "label": "makro.uz", "url": "https://makro.uz" },
+                { "label": "korzinka.uz", "url": "https://korzinka.uz" },
+                { "label": "uzum.uz", "url": "https://uzum.uz" }
+            ]
+        },
+        {
+            "ico": "💱",
+            "title": { "uz": "Pul ayirboshlash", "en": "Money exchange" },
+            "text": { "uz": "Banklar va rasmiy ayirboshlash punktlaridan foydalaning; joriy kurs — yuqoridagi kurslar blokida.", "en": "Use banks and official exchange points; current rates are shown in the block above." },
+            "links": [
+                { "label": "cbu.uz", "url": "https://cbu.uz" }
+            ]
+        },
+        {
+            "ico": "🏥",
+            "title": { "uz": "Sog'liqni saqlash", "en": "Healthcare" },
+            "text": { "uz": "Tez yordam — 103 yoki 112 (bepul). Xususiy klinikalar va dorixonalar ko'p; sug'urta foydali.", "en": "Ambulance: 103 or 112 (free). Private clinics and pharmacies are everywhere; insurance helps." },
+            "links": [
+                { "label": "ssv.uz", "url": "https://ssv.uz" }
+            ]
+        }
+    ],
+    "phrases": [
+        { "uz": "Assalomu alaykum", "en": "Hello" },
+        { "uz": "Rahmat", "en": "Thank you" },
+        { "uz": "Ha / Yo'q", "en": "Yes / No" },
+        { "uz": "Narxi qancha?", "en": "How much is it?" },
+        { "uz": "Bu qayerda?", "en": "Where is it?" },
+        { "uz": "Yordam bering!", "en": "Help me!" },
+        { "uz": "Tushunmadim", "en": "I don't understand" },
+        { "uz": "Inglizcha gapirasizmi?", "en": "Do you speak English?" },
+        { "uz": "Boshqacha aytib bering", "en": "Could you say it differently?" },
+        { "uz": "Bemorman", "en": "I feel sick" }
+    ]
+}

@@ -256,7 +256,7 @@
    const PRIORITY = ['USD', 'EUR', 'RUB', 'GBP', 'CNY', 'JPY', 'KZT', 'TRY', 'AED', 'KRW'];
    
    /* ---------- 5. Foydali xizmatlar ---------- */
-   const SERVICES = [
+   let SERVICES = [
        { ico: '🏛️', name: { uz: 'Davlat xizmatlari', en: 'Public services' }, cat: { uz: 'my.gov.uz', en: 'my.gov.uz' }, url: 'https://my.gov.uz' },
        { ico: '🧾', name: { uz: 'Soliq xizmati', en: 'Tax service' }, cat: { uz: 'soliq.uz', en: 'soliq.uz' }, url: 'https://soliq.uz' },
        { ico: '🏦', name: { uz: 'Markaziy bank', en: 'Central Bank' }, cat: { uz: 'cbu.uz', en: 'cbu.uz' }, url: 'https://cbu.uz' },
@@ -276,7 +276,7 @@
    ];
    
    /* ---------- 6. Favqulodda raqamlar ---------- */
-   const EMERGENCY = [
+   let EMERGENCY = [
        { ico: '🚒', num: '101', name: { uz: "Yong'in xavfsizligi", en: 'Fire service' } },
        { ico: '🚓', num: '102', name: { uz: 'Politsiya', en: 'Police' } },
        { ico: '🚑', num: '103', name: { uz: 'Tez tibbiy yordam', en: 'Ambulance' } },
@@ -286,7 +286,7 @@
    ];
    
    /* ---------- 6b. O'zbekiston haqida faktlar ---------- */
-   const FACTS = [
+   let FACTS = [
        { ico: '🏛️', label: { uz: 'Poytaxt', en: 'Capital' }, value: { uz: 'Toshkent', en: 'Tashkent' } },
        { ico: '👥', label: { uz: 'Aholi', en: 'Population' }, value: { uz: '~37 million', en: '~37 million' } },
        { ico: '📐', label: { uz: 'Maydon', en: 'Area' }, value: { uz: '448 978 km²', en: '448,978 km²' } },
@@ -298,7 +298,7 @@
    ];
    
    /* ---------- 6c. Bayramlar ---------- */
-   const HOLIDAYS = [
+   let HOLIDAYS = [
        { d: { uz: '1-yanvar', en: 'January 1' }, n: { uz: 'Yangi yil', en: 'New Year' } },
        { d: { uz: '8-mart', en: 'March 8' }, n: { uz: 'Xotin-qizlar kuni', en: "Women's Day" } },
        { d: { uz: '21-mart', en: 'March 21' }, n: { uz: "Navro'z bayrami", en: 'Navruz' } },
@@ -309,7 +309,20 @@
        { d: { uz: "har yili o'zgaradi", en: 'varies yearly' }, n: { uz: "Ro'za hayit, Qurbon hayit", en: 'Eid al-Fitr, Eid al-Adha' } }
    ];
    
-   /* ---------- 7. Yordamchilar ---------- */
+    /* ---------- 6e. Tashqi kontent (data.json - admin panel) ---------- */
+    function loadContentData() {
+        return fetch('data.json', { cache: 'no-store' })
+            .then((r) => (r.ok ? r.json() : null))
+            .then((d) => {
+                if (!d) return;
+                if (Array.isArray(d.services) && d.services.length) SERVICES = d.services;
+                if (Array.isArray(d.emergency) && d.emergency.length) EMERGENCY = d.emergency;
+                if (Array.isArray(d.facts) && d.facts.length) FACTS = d.facts;
+                if (Array.isArray(d.holidays) && d.holidays.length) HOLIDAYS = d.holidays;
+            })
+            .catch(() => {});
+    }
+    /* ---------- 7. Yordamchilar ---------- */
    const $ = (sel) => document.querySelector(sel);
    
    function escapeHtml(str) {
@@ -845,8 +858,14 @@
        renderServices();
        renderEmergency();
        renderFacts();
-       renderHolidays();
-       tickClock();
+               renderHolidays();
+        loadContentData().then(() => {
+            renderServices();
+            renderEmergency();
+            renderFacts();
+            renderHolidays();
+        });
+        tickClock();
        setInterval(tickClock, 1000);
    
        initMap();

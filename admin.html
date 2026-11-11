@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#1e88e5">
+    <title>Admin panel — Foydali Oyna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { min-height: 100vh; }
+        .adm-wrap { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.25rem 7rem; }
+        .adm-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; box-shadow: var(--shadow); }
+        .adm-title { font-size: 1.45rem; font-weight: 800; margin: 0 0 .35rem; }
+        .adm-sub { color: var(--text-soft); font-size: .9rem; margin: 0 0 1.2rem; }
+        .adm-field { display: block; margin-bottom: .8rem; }
+        .adm-field span { display: block; font-size: .78rem; font-weight: 600; color: var(--text-soft); margin-bottom: .3rem; }
+        .adm-input { width: 100%; box-sizing: border-box; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); border-radius: 10px; padding: .6rem .8rem; font: inherit; outline: none; }
+        .adm-input:focus { border-color: var(--primary); }
+        textarea.adm-input { min-height: 74px; resize: vertical; }
+        .adm-btn { border: 0; background: var(--primary); color: #fff; font-weight: 700; padding: .7rem 1.3rem; border-radius: 10px; cursor: pointer; font-size: .95rem; font-family: inherit; }
+        .adm-btn:hover { filter: brightness(1.08); }
+        .adm-btn.ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+        .adm-status { margin-top: .8rem; font-size: .88rem; min-height: 1.2em; }
+        .adm-status.ok { color: var(--accent); }
+        .adm-status.err { color: var(--danger); }
+        .adm-top { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+        .adm-top h1 { font-size: 1.25rem; font-weight: 800; margin: 0; flex: 1; }
+        .adm-badge { background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: .25rem .8rem; font-size: .8rem; color: var(--text-soft); font-weight: 600; }
+        .adm-tabs { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.2rem; }
+        .adm-tab { border: 1px solid var(--border); background: var(--surface); color: var(--text-soft); border-radius: 999px; padding: .45rem .95rem; cursor: pointer; font-weight: 600; font-size: .85rem; font-family: inherit; }
+        .adm-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .adm-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; margin-bottom: .8rem; }
+        .adm-item-head { display: flex; align-items: center; gap: .45rem; margin-bottom .7rem; margin-bottom: .7rem; }
+        .adm-item-head .ttl { font-weight: 700; font-size: .92rem; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .adm-item-head button { border: 1px solid var(--border); background: var(--surface-2); color: var(--text); border-radius: 8px; cursor: pointer; padding: .25rem .55rem; font-size: .85rem; }
+        .adm-item-head button.del { color: var(--danger); border-color: var(--danger); }
+        .adm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: .6rem .8rem; }
+        .adm-grid .full { grid-column: 1 / -1; }
+        .adm-savebar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); padding: .8rem 1.25rem; display: flex; align-items: center; gap: 1rem; z-index: 50; flex-wrap: wrap; }
+        .adm-savebar .st { flex: 1; font-size: .88rem; min-height: 1.2em; }
+        .adm-add { width: 100%; box-sizing: border-box; border: 1px dashed var(--border); background: transparent; color: var(--text-soft); border-radius: 12px; padding: .8rem; cursor: pointer; font-weight: 600; font-family: inherit; font-size: .95rem; }
+        .adm-add:hover { border-color: var(--primary); color: var(--primary); }
+        .adm-hint { font-size: .8rem; color: var(--text-soft); margin-top: 1.1rem; line-height: 1.5; }
+        .adm-hint a { color: var(--primary); }
+        .adm-note { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: .7rem .9rem; font-size: .83rem; color: var(--text-soft); margin-bottom: 1rem; line-height: 1.55; }
+    </style>
+</head>
+<body>
+    <div class="adm-wrap">
+
+        <!-- ===== Kirish ===== -->
+        <div class="adm-card" id="loginCard">
+            <h1 class="adm-title">Admin panel</h1>
+            <p class="adm-sub">Foydali Oyna — kontentlarni boshqarish (GitHub orqali, to'g'ridan-to'g'ri live saytga saqlanadi)</p>
+            <div class="adm-note">
+                Token faqat sizning brauzeringizda saqlanadi va hech kimga ko'rinmaydi.
+                Token yarating: <a href="https://github.com/settings/tokens/new?scopes=repo&amp;description=FoydaliOyna%20Admin" target="_blank" rel="noopener">GitHub token sahifasi</a> → "Generate token" → nusxa olib pastga qo'ying.
+            </div>
+            <label class="adm-field"><span>GitHub nomi</span>
+                <input class="adm-input" id="ownerInput" value="foydalioyna" autocomplete="off">
+            </label>
+            <label class="adm-field"><span>Repo nomi</span>
+                <input class="adm-input" id="repoInput" value="foydalioyna.github.io" autocomplete="off">
+            </label>
+            <label class="adm-field"><span>Token (repo ruxsati bilan)</span>
+                <input class="adm-input" id="tokenInput" type="password" placeholder="ghp_..." autocomplete="off">
+            </label>
+            <button class="adm-btn" id="loginBtn">Kirish</button>
+            <div class="adm-status" id="loginStatus"></div>
+        </div>
+
+        <!-- ===== Panel ===== -->
+        <div id="panel" style="display:none">
+            <div class="adm-top">
+                <h1>Admin panel — Foydali Oyna</h1>
+                <span class="adm-badge" id="repoBadge"></span>
+                <button class="adm-btn ghost" id="logoutBtn" style="padding:.45rem .9rem;font-size:.85rem">Chiqish</button>
+            </div>
+            <div class="adm-tabs" id="tabs"></div>
+            <div id="items"></div>
+            <button class="adm-add" id="addBtn">+ Yangi qator qo'shish</button>
+
+            <div class="adm-savebar">
+                <span class="st adm-status" id="saveStatus"></span>
+                <button class="adm-btn" id="saveBtn">Saqlash — GitHub'ga yuklash</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

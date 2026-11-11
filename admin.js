@@ -134,6 +134,39 @@
         el.className = 'st adm-status' + (cls ? ' ' + cls : '');
     }
 
+    /* ---------- Qulf (nik + parol) ---------- */
+    const LOCK_HASH = '59c5d385';
+
+    function lockHash(s) {
+        let h = 5381;
+        for (let r = 0; r < 64; r++) {
+            for (let i = 0; i < s.length; i++) {
+                h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+            }
+            h = (h ^ (r * 0x9E3779B1)) >>> 0;
+        }
+        return h.toString(16);
+    }
+
+    function setLockStatus(msg, cls) {
+        const el = $('#lockStatus');
+        el.textContent = msg || '';
+        el.className = 'adm-status' + (cls ? ' ' + cls : '');
+    }
+
+    function unlock() {
+        const nick = $('#nickInput').value.trim();
+        const pass = $('#passInput').value;
+        if (lockHash(nick + ':' + pass) === LOCK_HASH) {
+            sessionStorage.setItem('fo-lock', '1');
+            $('#lockCard').style.display = 'none';
+            $('#loginCard').style.display = '';
+            setLockStatus('');
+        } else {
+            setLockStatus('Nik yoki parol xato', 'err');
+        }
+    }
+
     /* ---------- Kirish ---------- */
     async function login() {
         state.owner = $('#ownerInput').value.trim() || 'foydalioyna';
@@ -314,16 +347,21 @@
     /* ---------- Chiqish ---------- */
     function logout() {
         localStorage.removeItem('fo-admin');
+        sessionStorage.removeItem('fo-lock');
         state.token = '';
         state.data = null;
         state.sha = null;
         $('#panel').style.display = 'none';
-        $('#loginCard').style.display = '';
+        $('#loginCard').style.display = 'none';
+        $('#lockCard').style.display = '';
         $('#tokenInput').value = '';
         setLoginStatus('');
     }
 
     /* ---------- Hodisalar ---------- */
+    $('#unlockBtn').addEventListener('click', unlock);
+    $('#passInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+    $('#nickInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#passInput').focus(); });
     $('#loginBtn').addEventListener('click', login);
     $('#tokenInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
     $('#saveBtn').addEventListener('click', save);
@@ -338,6 +376,9 @@
 
     /* ---------- Avtokirish ---------- */
     (function () {
+        if (sessionStorage.getItem('fo-lock') !== '1') return;
+        $('#lockCard').style.display = 'none';
+        $('#loginCard').style.display = '';
         try {
             const saved = JSON.parse(localStorage.getItem('fo-admin') || 'null');
             if (saved && saved.token) {

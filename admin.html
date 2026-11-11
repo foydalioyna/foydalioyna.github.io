@@ -52,8 +52,22 @@
 <body>
     <div class="adm-wrap">
 
-        <!-- ===== Kirish ===== -->
-        <div class="adm-card" id="loginCard">
+        <!-- ===== Qulf (nik + parol) ===== -->
+        <div class="adm-card" id="lockCard">
+            <h1 class="adm-title">Admin panel</h1>
+            <p class="adm-sub">Kirish uchun nik va parolni kiriting</p>
+            <label class="adm-field"><span>Nik</span>
+                <input class="adm-input" id="nickInput" autocomplete="off">
+            </label>
+            <label class="adm-field"><span>Parol</span>
+                <input class="adm-input" id="passInput" type="password" autocomplete="off">
+            </label>
+            <button class="adm-btn" id="unlockBtn">Ochish</button>
+            <div class="adm-status" id="lockStatus"></div>
+        </div>
+
+        <!-- ===== Kirish (GitHub token) ===== -->
+        <div class="adm-card" id="loginCard" style="display:none">
             <h1 class="adm-title">Admin panel</h1>
             <p class="adm-sub">Foydali Oyna — kontentlarni boshqarish (GitHub orqali, to'g'ridan-to'g'ri live saytga saqlanadi)</p>
             <div class="adm-note">
